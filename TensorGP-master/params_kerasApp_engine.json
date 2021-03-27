@@ -1,0 +1,27 @@
+{
+    "modelWeights_path": "/home/gama/BolsaStuff/EML_mainRep/Bolsa_main/Pretrained_models/mars_MobileNET128_5epochs_12depth.h5",
+    "seed": 1539772637,
+    "resolution": [
+        128,
+        128,
+        3
+    ],
+    "useGPU": true,
+    "number_generations": 200,
+    "population_size": 20,
+    "tournament_size": 3,
+    "mutation_rate": 0.05,
+    "crossover_rate": 0.8,
+    "max_tree_depth": 12,
+    "method": "ramped half-and-half",
+    "objective": "maximizing",
+    "stop_criteria": "generation",
+    "immigration": 10000,
+    "debug": 0,
+    "save_to_file": 10,
+    "save_graphics": true,
+    "show_graphics": false,
+    "read_init_pop_from_file": null,
+    "nameFolderImgs": "/home/gama/BolsaStuff/EML_mainRep/Art_datasets/backupRuns_Engine/minirunfffgrffffffun/run_Training2/run_Engine1",
+    "nameHDF5_file": "/home/gama/BolsaStuff/EML_mainRep/Art_datasets/backupRuns_Engine/minirunfffgrffffffun/run_Training2"
+}

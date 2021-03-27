@@ -1,0 +1,66 @@
+public class ImageData {
+    public static final String P_IMGWIDTH = "imgwidth";
+    public static final String P_IMGHEIGHT = "imgheight";
+    public static final int minDomain = -1;
+    public static final int maxDomain = 1;
+    public static final int imageWidth = 256;
+    public static final int imageHeight = 256;
+    /**
+     *
+     */
+    public int resW, resH;
+    private ArrayList<Pixel> imageRaw;
+
+    public ImageData(int w, int h) {
+        imageRaw = new ArrayList<Pixel>(w * h);
+        this.resW = w;
+        this.resH = h;
+
+        for (int i = 0; i < resW * resH; i++) {
+            imageRaw.add(null);
+        }
+    }
+
+    public ArrayList<Pixel> getImageRaw() {
+        return imageRaw;
+    }
+
+    public void myX() {
+        for(int i = 0; i < resW; ++i) {
+          for(int j = 0; j < resW; ++j) {
+             imageRaw.get(j * resW + i).setPixel(i, i, i);
+          }
+        }
+    }
+    
+    public void myY() {
+        for(int i = 0; i < resW; ++i) {
+          for(int j = 0; j < resW; ++j) {
+             imageRaw.get(j * resW + i).setPixel(j, j, j);
+          }
+        }
+    }
+
+    public void myIf(ImageData image1, ImageData image2) {
+        for (int i = 0; i < resW * resH; i++)
+            imageRaw.get(i).myIf(image1.getImageRaw().get(i), image2.getImageRaw().get(i));
+    }
+
+    public void add(ImageData anotherImage) {
+        for (int i = 0; i < resW * resH; i++)
+            imageRaw.get(i).add(anotherImage.getImageRaw().get(i));
+    }
+
+    public void warp(ImageData anotherImage1, ImageData anotherImage2, ImageData anotherImage3) {
+        for (int i = 0; i < resW * resH; i++) {
+
+            Pixel xCoord = anotherImage1.getImageRaw().get(i);    // get x from image A
+            Pixel yCoord = anotherImage2.getImageRaw().get(i);    // get y from image B
+
+
+            imageRaw.get(i).warp(anotherImage3, xCoord, yCoord);
+        }
+    }
+    
+    public void 
+}

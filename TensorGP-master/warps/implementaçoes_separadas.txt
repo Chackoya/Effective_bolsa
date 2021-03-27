@@ -1,0 +1,69 @@
+Implementaçõoes dos warp sem o código de teste e debugs:
+A versão em Java foi escrita e testada em Processing (pasta warp_java), não com OpenCV.
+As implementações em python estão em no test_warp.py - nas linhas 151 e 154 estão testes de imagens usando o warp normal e o TF
+
+
+# pyhton manual
+def normal_warp(image, xcoord_im, ycoord_im, dims, mind, maxd):
+    result = np.empty(dims, dtype=float)
+
+    wid = dims[0]
+    hei = dims[1]
+    for i in range(wid):
+        for j in range(hei):
+
+            xCoord = xcoord_im[i][j]
+            yCoord = ycoord_im[i][j]
+
+
+            auxX = (wid) / (maxd - mind)
+            auxY = (hei) / (maxd - mind)
+
+            i1 = int(round((xCoord[0] - mind) * auxX))
+            j1 = int(round((yCoord[0] - mind) * auxY))
+            i2 = int(round((xCoord[1] - mind) * auxX))
+            j2 = int(round((yCoord[1] - mind) * auxY))
+            i3 = int(round((xCoord[2] - mind) * auxX))
+            j3 = int(round((yCoord[2] - mind) * auxY))
+
+            i1 = (i1 if (i1 >= 0) else 0) if (i1 < wid) else (wid - 1)
+            j1 = (j1 if (j1 >= 0) else 0) if (j1 < hei) else (hei - 1)
+            i2 = (i2 if (i2 >= 0) else 0) if (i2 < wid) else (wid - 1)
+            j2 = (j2 if (j2 >= 0) else 0) if (j2 < hei) else (hei - 1)
+            i3 = (i3 if (i3 >= 0) else 0) if (i3 < wid) else (wid - 1)
+            j3 = (j3 if (j3 >= 0) else 0) if (j3 < hei) else (hei - 1)
+
+            result[i][j][0] = image[i1][j1][0]
+            result[i][j][1] = image[i2][j2][1]
+            result[i][j][2] = image[i3][j3][2]
+
+    return result
+	
+
+
+
+# TensorFlow python
+def resolve_warp_node(tensors, image, dimensions):
+    n = len(dimensions)
+
+    indices = tf.stack([
+        tf.clip_by_value(
+            tf.round(tf.multiply(
+                tf.constant((dimensions[k] - 1) * 0.5, tf.float32, shape=dimensions),
+                tf.math.add(tensors[k], tf.constant(1.0, tf.float32, shape=dimensions))
+            )),
+            clip_value_min=0.0,
+            clip_value_max=(dimensions[k] - 1)
+        ) for k in range(n)],
+        axis = n
+    )
+
+    indices = tf.cast(indices, tf.int32)
+	
+    return tf.gather_nd(image, indices)
+
+
+// Java manual
+
+
+

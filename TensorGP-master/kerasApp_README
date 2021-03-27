@@ -1,0 +1,12 @@
+Some runs with different configs are in the outputfolder... used 20 to 500 generations to try stuff...
+
+
+Dependencies are the same as the normal version of those files ( except that im using the new keras/tf versions but it shouldn't impact here)
+
+
+Usage kerasApp example:
+
+- choose one of the weights mobile / xception and change line ~110 to your path
+- change line 49 - 50 by uncommenting the useless line (depending if using xception or mobilenet)
+- run it
+
